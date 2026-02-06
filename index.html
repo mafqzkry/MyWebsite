@@ -9,23 +9,34 @@
 <body>
 
     <div class="card">
-        <h1>Hi, I'm a Developer!</h1>
-        <p>I am learning Front End and Back End in VS Code.</p>
-        
-        <div class="skills">
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>JavaScript</span>
-        </div>
-
-        <form action="https://formspree.io/f/mzdapwwy" method="POST">
-    <input type="hidden" name="_next" value="https://yourwebsite.com/thanks.html">
-    <input type="email" name="email" placeholder="Your email" required>
-    <textarea name="message" placeholder="Your message" required></textarea>
-
-    <button type="submit">Send Message</button>
+    <div class="heart">❤️</div>
+    <h1>For My Favorite Person</h1>
+    <p>I built this website just to say how much I appreciate you.</p>
+    
+    <form action="https://formspree.io/f/mzdapwwy" method="POST">
+        <input type="hidden" name="Message" value="She opened the letter!">
+        <button type="submit">Click for a Surprise</button>
     </form>
-    </div>
+</div>
+<script>
+document.addEventListener('click', (e) => {
+    const heart = document.createElement('div');
+    heart.innerHTML = '❤️';
+    heart.style.position = 'absolute';
+    heart.style.left = e.pageX + 'px';
+    heart.style.top = e.pageY + 'px';
+    heart.style.fontSize = '24px';
+    heart.style.pointerEvents = 'none';
+    document.body.appendChild(heart);
 
+    // Make it float up and disappear
+    heart.animate([
+        { transform: 'translateY(0)', opacity: 1 },
+        { transform: 'translateY(-100px)', opacity: 0 }
+    ], { duration: 1000 });
+
+    setTimeout(() => heart.remove(), 1000);
+});
+</script>
 </body>
 </html>
