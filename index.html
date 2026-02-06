@@ -22,6 +22,12 @@
         <button id="noBtn" style="position: absolute; margin-left: 10px;">No</button>
     </div>
 </div>
+<div class="music-container" style="margin-top: 20px;">
+    <button id="musicBtn">🎵 Play Music</button>
+    <audio id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+</div>
 
 <script>
         // 1. Moving "No" Button Logic
@@ -56,6 +62,19 @@
 
             setTimeout(() => heart.remove(), 1000);
         });
+        // 3. Music Toggle Logic
+const musicBtn = document.getElementById('musicBtn');
+const bgMusic = document.getElementById('bgMusic');
+
+musicBtn.addEventListener('click', () => {
+    if (bgMusic.paused) {
+        bgMusic.play();
+        musicBtn.innerHTML = "⏸️ Pause Music";
+    } else {
+        bgMusic.pause();
+        musicBtn.innerHTML = "🎵 Play Music";
+    }
+});
     </script>
 </body>
 </html>
