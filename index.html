@@ -10,33 +10,54 @@
 
     <div class="card">
     <div class="heart">❤️</div>
-    <h1>For My Favorite Person</h1>
-    <p>I built this website just to say how much I appreciate you.</p>
+    <h1>Will you be my Valentine?</h1>
+    <p>I built this just for you!</p>
     
-    <form action="https://formspree.io/f/mzdapwwy" method="POST">
-        <input type="hidden" name="Message" value="She opened the letter!">
-        <button type="submit">Click for a Surprise</button>
-    </form>
+    <div class="button-group">
+        <form action="https://formspree.io/f/mzdapwwy" method="POST" style="display: inline;">
+            <input type="hidden" name="Response" value="She said YES!">
+            <button type="submit" id="yesBtn">Yes!</button>
+        </form>
+
+        <button id="noBtn" style="position: absolute; margin-left: 10px;">No</button>
+    </div>
 </div>
+
 <script>
-document.addEventListener('click', (e) => {
-    const heart = document.createElement('div');
-    heart.innerHTML = '❤️';
-    heart.style.position = 'absolute';
-    heart.style.left = e.pageX + 'px';
-    heart.style.top = e.pageY + 'px';
-    heart.style.fontSize = '24px';
-    heart.style.pointerEvents = 'none';
-    document.body.appendChild(heart);
+    // 1. Logic for the "No" button to run away
+    const noBtn = document.getElementById('noBtn');
 
-    // Make it float up and disappear
-    heart.animate([
-        { transform: 'translateY(0)', opacity: 1 },
-        { transform: 'translateY(-100px)', opacity: 0 }
-    ], { duration: 1000 });
+    function moveButton() {
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+        
+        noBtn.style.left = `${x}px`;
+        noBtn.style.top = `${y}px`;
+    }
 
-    setTimeout(() => heart.remove(), 1000);
-});
+    noBtn.addEventListener('mouseover', moveButton);
+    noBtn.addEventListener('touchstart', moveButton);
+
+    // 2. Logic for the floating hearts on click
+    document.addEventListener('click', (e) => {
+        // Don't create a heart if clicking the button (optional)
+        const heart = document.createElement('div');
+        heart.innerHTML = '❤️';
+        heart.style.position = 'absolute';
+        heart.style.left = e.pageX + 'px';
+        heart.style.top = e.pageY + 'px';
+        heart.style.fontSize = '24px';
+        heart.style.pointerEvents = 'none';
+        heart.style.zIndex = '9999';
+        document.body.appendChild(heart);
+
+        heart.animate([
+            { transform: 'translateY(0)', opacity: 1 },
+            { transform: 'translateY(-100px)', opacity: 0 }
+        ], { duration: 1000 });
+
+        setTimeout(() => heart.remove(), 1000);
+    });
 </script>
 </body>
 </html>
