@@ -24,40 +24,38 @@
 </div>
 
 <script>
-    // 1. Logic for the "No" button to run away
-    const noBtn = document.getElementById('noBtn');
+        // 1. Moving "No" Button Logic
+        const noBtn = document.getElementById('noBtn');
+        if (noBtn) {
+            const moveButton = () => {
+                const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+                const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+                noBtn.style.left = `${x}px`;
+                noBtn.style.top = `${y}px`;
+            };
+            noBtn.addEventListener('mouseover', moveButton);
+            noBtn.addEventListener('touchstart', moveButton);
+        }
 
-    function moveButton() {
-        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-        
-        noBtn.style.left = `${x}px`;
-        noBtn.style.top = `${y}px`;
-    }
+        // 2. Floating Hearts Logic
+        document.addEventListener('click', (e) => {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.style.position = 'absolute';
+            heart.style.left = e.pageX + 'px';
+            heart.style.top = e.pageY + 'px';
+            heart.style.fontSize = '24px';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '9999';
+            document.body.appendChild(heart);
 
-    noBtn.addEventListener('mouseover', moveButton);
-    noBtn.addEventListener('touchstart', moveButton);
+            heart.animate([
+                { transform: 'translateY(0)', opacity: 1 },
+                { transform: 'translateY(-100px)', opacity: 0 }
+            ], { duration: 1000 });
 
-    // 2. Logic for the floating hearts on click
-    document.addEventListener('click', (e) => {
-        // Don't create a heart if clicking the button (optional)
-        const heart = document.createElement('div');
-        heart.innerHTML = '❤️';
-        heart.style.position = 'absolute';
-        heart.style.left = e.pageX + 'px';
-        heart.style.top = e.pageY + 'px';
-        heart.style.fontSize = '24px';
-        heart.style.pointerEvents = 'none';
-        heart.style.zIndex = '9999';
-        document.body.appendChild(heart);
-
-        heart.animate([
-            { transform: 'translateY(0)', opacity: 1 },
-            { transform: 'translateY(-100px)', opacity: 0 }
-        ], { duration: 1000 });
-
-        setTimeout(() => heart.remove(), 1000);
-    });
-</script>
+            setTimeout(() => heart.remove(), 1000);
+        });
+    </script>
 </body>
 </html>
