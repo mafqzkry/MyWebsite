@@ -47,3 +47,7 @@ button {
 }
 
 button:hover { background-color: #c9184a; transform: scale(1.1); }
+#noBtn {
+    transition: all 0.2s ease; /* Makes the button "slide" instead of teleporting */
+    z-index: 1000;
+}
